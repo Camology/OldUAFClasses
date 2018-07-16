@@ -1,0 +1,47 @@
+Chain of Responsibility :
+  * Many levels of handling objects, to insure proper handling. The example given is like calling a technical support question
+  and going through the layers of customer support.
+  * Useful for reducing tight coupling. Follows the S and O in SOLID.
+Command
+  * Bundling information for a request into an object called a "command". The example given is an order at a restaurant. The order
+  contains all of the information about the order so that the chef doesn't have to run around asking for information again.
+  * Useful for decoupling invoking operations and performing them. Can undo, defer operations easier. Also combine commands into 
+  larger ones.
+State
+  * Allows objects to alter their behaviour based on a defined internal state. The example given is that your phone performs
+  differently in different states. IE the buttons may unlock the phone while it is locked. And they may take you home while
+  the phone is unlocked however.
+  * Useful for organization since the separate contexts have separate code in different files. Not useful if you only have a 
+  small set of contexts.
+Visitor
+  * The visitor pattern has you writing an interface that "visits" your other classes. The example given is of 
+  a traveling salesman. He travels to many places but has different "sales" methods depending on the location he has visited. 
+  * This is useful because adding new operations is very simple, also consolidates similar behaviours into one visitor class.
+Observer
+  * The observer pattern defines a behaviour that when an object changes all of it's dependents are notified and update.
+  The example given is that if you subscribe to a magazine you don't have to go looking for it at the news stand every week.
+  Instead they will send it to you at your home and update their shipping services whenever there is a change.
+  * Useful because objects can be subscribed/unsubscribed rather easily and the publishers/subscribed aren't coupled tightly.
+Decorator
+  * Easily attach new behaviours to objects using wrapper functions. The example given in class was adding adjectives to 
+  armor/weapons in a RPG game through wrapper functions. IE : Armor -> Rusty Armor | Shimmering Armor | etc
+  * Useful because it's more flexible than basic inheritence. Can also combine multiple wrappers into mega-wrappers.
+Composite
+  * Combines objects into "trees" that clients can work with as if they were objects themselves. The examples given
+  are that an army is made up of many members, but those members are grouped into squads, battalions, etc or a "tree".
+  * Useful because it simplifies client code that interacts with complex tree structures. Makes it easier to add new components.
+Interpreter
+  * Defines a "grammar" for a language and that grammar is tied to object oriented desgins. This is to simplify problem solving.
+Proxy
+* Provides an abstraction for objects to control access to it through a filter. The example given is that checks represent cash,
+but in a consolidated form. You can use a check to represent cash and operate with it very similarly.
+* Useful for controlling access without clients noticing. It does delay processes inherently due to proxy accesses.
+
+Adapter
+* Wrap an existing class in a way that the interface client expects it. This can be as simple as a thin wrapper or as extensive as reinterpreting values but at that point maybe you are using the wrong pattern for your project. The example given in class was a home automation package that could do on/off switches but you wanted to hook up a smart door to it which had open/closed functionality. The "Adapter" wrapped around it and interpreted open as on, closed as off etc.
+
+Facade
+* Useful for wrapping a seemingly complex set of subsystems into appearing like it is one combined system with a unified interface for a simpler user experience. The example given is that a customer service agent will access multiple subsystems (ordering, bill processing, customer information) through one interface so they don't have to switch back and forth between different programs in their work day. So while these are implemented separately they are accessed singularly.
+
+Template
+* Design a skeleton function with placeholder values that subclasses can then redefine to fit their specific needs. Useful if two or more classes/objects have very similar methods but some drastic changes that make it so they can't 100% derive from the same source. An example given is that all workers have similar schedules but go about their work in different methods. The different workers would override the base schedule if theres is different.

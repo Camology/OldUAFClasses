@@ -1,0 +1,27 @@
+SRP – the Single Responsibility Principle
+  * This says that your classes/functionality should have one single responsibility. So maybe your mailing order system
+  shouldn't also handle processing payments as that is two very distinct responsibilities that should be in their own classes.
+  * The easy way to follow this principle is keep your classes simple. Don't overextend.
+
+OCP – the Open/Closed Principle
+  * Your code should be open to extend but closed to modification. Allow people to extend off your stuff to make their own subclass
+  but they shouldn't be changing your source code directly as this can break your intended functionality. 
+
+LSP – the Liskov Substitution Principle
+  * Any subclass should be able to "substitute" for the base class. This can be explained with thinking of the shapes we did in 
+  for the CPS project. A shape is the base class and a square is the subclass. A square is a shape and should be able to be used
+  anywhere that a shape is used. But the same is not true reciprocally as a shape is not a square.
+  * The simple way to follow this, when extending implement all base class methods.
+
+ISP – the Interface Segregation Principle
+ * Similar to SRP but for interfaces. Your interfaces shouldn't be linked in ways that don't actually make logical sense but 
+ instead should be segregated from eachother. An example we came up with is in a car has multiple interfaces for dealing with
+ its different systems. The acceleration pedal is the interface for driving the car forward, and the audio knob is the interface
+ for raising the volume. If the pedal also controlled your audio volume that wouldn't make much sense as those interfaces
+ should be segregated.
+
+DIP – the Dependency Inversion Principle
+  * This means that high level modules shouldn't depend on low level modules but instead they should both depend on abstractions.
+  This means that the usage between both modules shouldn't be thought of as a one way street but instead thought of as an
+  abstraction layer. The solution to this is to create your low level modules with interaction in mind when you create it which is
+  generally the opposite of how they are created hence the inversion name.

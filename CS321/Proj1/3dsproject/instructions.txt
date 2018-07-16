@@ -1,0 +1,4 @@
+1. make file
+2. get off the UAF network, they won't let you send files to a 3DS and the 3DS can't connect anyway
+3. in bash : $DEVKITARM/bin/3dslink -a [3ds ip address] filename.3dsx
+4. have some fun
