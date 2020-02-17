@@ -1,0 +1,288 @@
+8/25
+
+Minimal change algorithms are algorithms that only change one bit at a time, this can speed up exhaustive searches by a constant.
+
+Gray code to generate subsets in a minimal change recursive form:
+    List gray code bit strings of size n-1 with a 0 in front, and then again with a 1 in front.
+    000
+    001
+    011
+    ---
+    110
+    111
+    101
+    100
+
+Loopless algorithm: Constant time to generate the next entry (continued later)
+
+n! permutations
+123
+132
+213
+231
+312
+321
+Can also use the next_permutation(iter_begin, iter_end+1) std algorithm to generate them in C++ and sorts in lexicographic order
+
+Combinations
+n choose K
+6 choose 3            
+         654321
+
+123      000111       
+124      001011       
+125   =  010011       
+126      100011   
+134      001101
+...      ...
+^ Odometer method ^
+
+Colex order
+lexicographic order of the reverse of the Combinations
+123
+124
+134
+234
+125
+...
+
+Ranking function: Want the Ith element and what its value is
+
+
+9/27/2019
+~DECREASE BY A CONSTANT FACTOR~
+
+
+Fake coin problem
+
+Divide coins into 3 piles and the leftovers are castaway. If all 3 of them equal, you take the remaining amount and split that into 3.
+Example: 17 coins, 1 of them is counterfeit. Use a scale to find out which it is.
+17 coins
+5 5 5 and 2 leftover
+2 of the fives are equal, left with 7 coins
+7 coins
+2 2 2 and 1 leftover
+2 of twos are equal, left with 3 coins
+3 coins
+1 1 1
+you've found the fake coin 
+
+Russian Peasent Multiplication
+
+M * N 
+if N is odd, add to total. If even don't (except when M=1)
+Divide M/2 rounding down. If even double N, if odd double N + N 
+Until M = 1, then add up your totals.
+Example: 
+9 * 7           7
+4 * 14          
+2 * 28
+1 * 56          56
+------------------
+                63
+
+
+
+Binary Search
+
+
+9/30
+
+Read Chapter 5 Intro & 5.1
+
+Quiz topics: 
+What is the selection problem?
+What is the average/worst/best case for Quickselect?
+Space complexity of QuickSelect?
+Same question with IntroSelect?
+Same question with Median of Medians?
+
+Variable Size Decrease Algorithms: 
+    Sometimes 
+
+The Selection Problem: Given a list and an integer k with o <= k < n where n is the size of the list, return the item that would be at index k 
+    if the list were sorted.
+    * What is the complexity? Easily linear when k is 0 (min) or n-1 (maximum)
+    * What about when k is n/2? (Median)
+        Sort and pick the middle (nlogn)
+QuickSelect: QuickSort but we only recurse on the side that matters
+
+    Size of input: n
+    Basic operation: Comparison 
+    Worst case: n^2
+    Average case: 2n (linear)
+
+Quicksort:
+    List :[      |       ]
+                n/2
+    * Choose a pivot and sort both sides higher and lower than middle
+    Instead for Quick Select, you only sort the side that contains our N and continues to Quick Select sort on different pivots until our point is found
+    Cannot use the master theorem as it does not split into equal sized chunks
+    Time Average: O(n)
+    Time worst: O(n log n)
+    Space Average: O(n)
+    Space worst: O(log n)
+
+
+
+Partitioning algorithms: 
+    Lomuto:
+        Keep track of Pivot p, at point f, s is where < p ends and < p begins. i is the point checking currently. m is the mid point or pivot. 
+        Average case: 2n 
+
+    Hoare:
+        Continue moving pivot from both sides while < p until find > p and swap, continue. Once they cross the partition 
+        is ordered after switching p to middle point
+        Average case: O(n)
+
+IntroSelect: 
+    QuickSelect to start with, if it starts to slow down [twice (log n) recursion depth] then 
+        nope out of there and use some other selecting algorithm.
+    Performance is noted as poor after k n amount of recursive steps with no solution,
+    if so switch to QuickSelect variation called Median of Medians or BFPRT guaranteed to run in linear time. 
+        Break up n things into blocks of size 5. 
+        Find the median of each block independently (constant time)
+        Move the median of each block to the beginning of the list. n/5 medians in the first section.
+        Quick select on the set of medians, find the median of those medians.
+        Using that new median of median as the pivot for Quick Select partition. (linear)
+        recurse as normal (7/10 n)
+        Q(n) = n/5 + Q(2n/10) + n + Q(7n/10)
+             = 9/10 linear 
+             = linear 
+
+    Average case: nlogn
+    worst: n^2
+
+Killer Sequences: Bad data that forces worst case scenarios for algorithms that have really good average cases. 
+
+Example of Killer Sequence with partitioning: 
+
+100 items:
+[1                   2                     3]
+ S                   P                     F
+[1 2| > 2                                  3]
+
+Can optimize for killer sequences by eliminating tail recursion. It also becomes in place. 
+
+Median of Three: 
+
+Choose 3 pivots, first middle and end. Choose the middle of those 3. Often great. 
+
+8/4/2019
+
+Master Theorem (divide and conquer) only
+T(n) = a T(n/b) + f(n) where f(n) \epsilon \theta n^d, d >= 0
+
+A = number of recursive calls
+B = number of chunks we divide into 
+D = the number that n is to in θ(n^d)
+
+
+split things into size n/b where we need to solve a of them.
+
+if a < b^d :  T(n) ε θ(n^d) 
+if a = b^d :  T(n) ε θ (n^d log_n) 
+if a > b^d :  T(n) ε θ (n^log_b(a))
+
+
+Binary search with master theorem:
+a = 1, size = n/2 b = 2, \theta(1) n^d = 1 as d = 0
+
+Binary Trees
+
+Traversal types:
+
+Preoder:
+    visit root, preorder left and right subtree (special case of DFS)
+Inorder: 
+    visit left, visit root, visit right
+Postorder:
+    visit left, visit right, visit root 
+
+
+Multiplication 
+∙ Input size? Number of digits in the larger number 
+∙ Basic operation? Multiplication/ or /addition     
+∙ What is the brute force efficiency class? O(n²) two for loops 
+∙ Can we do better? 
+    ∙ Divide and Conquer? nope, still n²
+     
+
+
+Karatsuba Multiplication algorithm 
+
+    Examine two 2-digit numbers ab and cd 
+    The product is 100ac + 10(ad+bc) +bd 
+    but Note, (a+b)(c+d) - ac -bd is (ad+bc)! and is only 3 Multiplications and 4 additions instead of 1 
+    Can apply this recurisvely, instead of 2 digit numbers, use n digit numbers and the sub problems are of size n/2 
+
+    Divide and conquer numbers into two sets that give the answer when multiplied and added/subtracted in odd ways. 
+
+
+master theorem to analyze that ^
+    A(n) = 3A(n/2) + O(n)
+
+    M(n) = 3M(n/2) + O(1) = O(n¹. ⁵⁸⁵)
+    1 2 3 4  8  16  32
+    1 3 9 27 
+    3ˡᴼᵍ²ᵇ = nˡᴼᵍ²ᵇ = ~1.585
+    or A = 3, b=2, d=1
+    a > b^d : nˡᴼᵍᵇᵃ : n ˡᴼᵍ² ³ = ~ n¹.⁵⁸⁵
+
+Matrix Multiplication 
+    n x n matrices 
+      n      n       n 
+    n[ ] x n[ ] = n [ ]
+    O(n³) for bruteforce  
+
+10/9/2019
+
+Closest Pair:
+    Find which two vertices in a 2D space, which two are the closest together?
+    Brute force efficiency: O(n²)
+    Split into two sides, find minimum on each side
+    What about the middle? 
+        For every point in the middle (n)
+            Compare to the next 6 
+        
+        T(n) = 2T(n/2) +O(n)
+        See the class slides for more information on how this works out.
+        End up being O(n log n)
+
+Convex Hull:
+    Which points in a random set can encircle all other points with the smallest size
+    Brute force efficiency: θ(n³)
+    Dive and conquer method:
+        Given points A and B which are on the convex hull, a point C that is farthest from a line 
+        through A,B must also lie on the hull. 
+        Then recurse using A,C and B, C
+        Initial points can be found with: Largest X and smallest X 
+    θ(n²) 
+    but average case is θ(n) !!!
+
+
+Transform and Conquer (least satisfying to Dr Hartman)
+    Transform the problem into some form that's easily solvable 
+    Instance of a problem: Specific example of input for a problem
+        Examples: 
+            instance of the convex hull problem is a collection of points in the plane
+            instance of the sorting problem is a list
+    Instance simplification: Replace the instance with an instance of  the same problem, for which the problem is easier to solve
+        Example: Pre-sort the input 
+            Determine if all the items in an array are unique 
+            Topological sort: 
+    Representation change: Compute a difference Representation of the same instance 
+
+    
+    Problem reduction: Replace with an instance of a different problem, so that the solution to this new problem
+        gives us the solution to the original problem. 
+
+    Analysis of transform and conquer: 
+        Transform the problem, solve the transformed problem. When analyzing consider the efficiency of both cases.
+    
+    Associative Datasets are collections of data composed of information that we look up using a key, which is associated with a value.
+    IE a database, hashmap, associative array, table, dictionary, etc 
+
+    CRUD - create read update and delete (associated data value pairs operations) 
+
+    Balanced: 

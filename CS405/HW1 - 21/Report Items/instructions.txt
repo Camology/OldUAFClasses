@@ -1,0 +1,11 @@
+How to use 21-AI game by CKTitus:
+
+Run using python3, might work with others not sure but I doubt it.
+
+1. Input name for AI player, there is a default name if you press enter
+2. Input AI type, "Advanced" is the only AI I made, anything
+   else will default to random
+3. Name your dealer, there is a default name if you press enter
+4. Pick how many games, default is 1000
+
+Let them play and await results.
